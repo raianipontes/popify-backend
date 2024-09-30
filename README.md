@@ -27,5 +27,9 @@ Crie um arquivo `.env` na raiz do projeto com a seguinte variável de ambiente:
 ```bash
 OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
+Para a execução do projeto, rode o seguinte comando:
+```bash
+uvicorn main:app --reload
+``` 
 ### Parte visual 🎨
 O fron-tend do sistema está disponível no repositório https://github.com/raianipontes/popify-frontend
