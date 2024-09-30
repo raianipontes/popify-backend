@@ -7,7 +7,6 @@ app = FastAPI()
 logger = logging.getLogger(__name__)
 
 
-# Configuração de CORS (se necessário)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -16,10 +15,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Cria uma instância do serviço RAG
 service = RAGService()
 
-# Armazena as mensagens em uma lista para simular um banco de dados (você pode trocar isso por um banco de dados real)
 messages = []
 
 @app.post("/messages/")
@@ -29,11 +26,9 @@ async def create_message(request: Request):
     user_query = data.get('message')
 
     try:
-        # Gera a resposta do bot
         bot_response = service.generate_answer(user_query)
         logger.info(f"Resposta gerada: {bot_response}")
 
-        # Armazena a mensagem do usuário e a resposta do bot
         messages.append({"content": user_query, "sender": "user"})
         messages.append({"content": bot_response, "sender": "bot"})
 
@@ -46,7 +41,6 @@ async def create_message(request: Request):
 @app.get("/messages/")
 async def get_messages():
     try:
-        # Retorna todas as mensagens armazenadas
         return messages
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
